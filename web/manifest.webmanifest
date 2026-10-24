@@ -1,0 +1,15 @@
+{
+  "name": "ลอยกระทงคัพ 54 — ระบบจัดการแข่งขันฟุตบอล",
+  "short_name": "ลอยกระทงคัพ 54",
+  "description": "ระบบจัดการแข่งขันฟุตบอล ลอยกระทงคัพ ครั้งที่ 54 เทศบาลเมืองกันตัง · ใช้ได้ทั้งออฟไลน์และออนไลน์",
+  "lang": "th",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b6b5f",
+  "theme_color": "#0b6b5f",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
