@@ -1,0 +1,19 @@
+/* ปุ่ม SAVE · แถบสถานะ · ข้อความแจ้งเตือน */
+header .hr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#st{max-width:60vw}
+#st.off{background:#b4231855}
+#st.warn{background:#f7900955}
+#st.ok{background:#12b76a55}
+#saveBtn{border:0;border-radius:99px;padding:7px 18px;font:inherit;font-weight:700;color:#fff;background:#ffffff33;cursor:pointer;white-space:nowrap}
+#saveBtn.need{background:#f79009;color:#1d2433;animation:savePulse 1.4s ease-in-out infinite}
+#saveBtn:disabled{opacity:.7;cursor:progress;animation:none}
+@keyframes savePulse{0%,100%{box-shadow:0 0 0 0 #f7900988}50%{box-shadow:0 0 0 7px #f7900900}}
+#toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#1d2433;color:#fff;padding:10px 16px;border-radius:10px;max-width:92vw;font-size:14px;transition:opacity .25s,transform .25s;z-index:60;box-shadow:0 6px 20px #0004}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast.ok{background:#067647}
+#toast.warn{background:#b54708}
+#toast.err{background:#b42318}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:10px 0;font-size:14px}
+.chk input{width:auto;margin-top:3px}
+.btn{display:inline-block;padding:8px 14px;border-radius:8px;border:1px solid var(--p);background:#fff;color:var(--p);cursor:pointer}
+@media print{#toast,#saveBtn{display:none!important}}
