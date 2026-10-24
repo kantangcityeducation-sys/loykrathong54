@@ -1,9 +1,9 @@
 /* Service Worker — ทำให้เปิดเว็บได้แม้ไม่มีอินเทอร์เน็ต
    เมื่อแก้ไขไฟล์ใด ๆ ในโฟลเดอร์ web ให้เปลี่ยนเลข VERSION เพื่อให้ทุกเครื่องโหลดไฟล์ใหม่ */
-const VERSION = 'cl54-v1';
+const VERSION = 'cl54-v3-20261024';
 const SHELL = [
   './', 'index.html', 'config.js', 'manifest.webmanifest', 'css/app.css', 'css/savebar.css',
-  'js/data/seed-data.js', 'js/core/state.js', 'js/data/doc-forms.js', 'js/core/mutations.js',
+  'js/data/current-data.js', 'js/data/seed-data.js', 'js/core/state.js', 'js/data/doc-forms.js', 'js/core/mutations.js',
   'js/views/menu-teams-draw.js', 'js/views/program.js', 'js/views/registry-lineup.js',
   'js/views/disciplinary-docs.js', 'js/core/router.js', 'js/core/print.js', 'js/core/images-cover.js',
   'js/views/projector.js', 'js/views/results-home.js', 'js/views/settings.js', 'js/core/shift-dates.js',
