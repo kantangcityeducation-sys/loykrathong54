@@ -1,0 +1,1 @@
+function shift(v){const f=S.m.find(m=>m.d),df=Math.round((new Date(v)-new Date(f.d))/864e5);S.m.forEach(m=>{if(m.d){const x=new Date(m.d);x.setUTCDate(x.getUTCDate()+df);m.d=x.toISOString().slice(0,10)}});save();render()}
