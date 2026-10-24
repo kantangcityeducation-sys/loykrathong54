@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{color-scheme:dark;--bg:#071426;--panel:#10243b;--gold:#e7bd62;--line:#29415a;--muted:#a9bbcf}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#173451,var(--bg) 60%);color:#f7f9fc;font-family:Tahoma,"Noto Sans Thai",sans-serif}
+header{padding:28px 14px;text-align:center;border-bottom:1px solid var(--line);background:#071426cc}.eyebrow{color:var(--gold);letter-spacing:.12em;font-size:.8rem}h1{margin:8px 0;color:var(--gold);font-size:clamp(1.4rem,4vw,2.4rem)}header p{color:var(--muted);margin:8px 0}
+main{max-width:1150px;margin:auto;padding:18px 12px 40px}.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:14px}
+input,select{font:inherit;color:#fff;background:#0d2034;border:1px solid var(--line);padding:10px 12px;border-radius:10px;min-width:145px}
+.card{background:linear-gradient(145deg,#112940,#0c1d30);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin:14px 0}.card h2{font-size:1.1rem;margin:0;padding:14px 15px;color:var(--gold);border-bottom:1px solid var(--line)}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{padding:10px 11px;text-align:left;border-bottom:1px solid #233a51;vertical-align:top}th{font-size:.88rem;color:var(--gold);background:#0a1a2a}td{font-size:.92rem}tr:last-child td{border-bottom:0}.score{font-weight:700;color:var(--gold);white-space:nowrap}.pill{display:inline-block;border:1px solid #3c536a;border-radius:20px;padding:3px 9px;font-size:.8rem}.muted,.status{color:var(--muted)}.empty{padding:24px;text-align:center;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}
+@media(max-width:600px){header{padding:22px 10px}main{padding:10px 7px}th,td{padding:8px;font-size:.84rem}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">KANTANG CITY MUNICIPALITY</div><h1>ฟุตบอลลอยกระทงคัพ ครั้งที่ 54</h1><p>ประจำปี 2569 · ข้อมูลประชาสัมพันธ์การแข่งขัน</p></header>
+<main>
+<div class="bar"><div id="status" class="status">กำลังโหลดข้อมูล…</div><div><input id="q" type="search" placeholder="ค้นหาทีม / วันที่ / สนาม" aria-label="ค้นหาข้อมูล"><select id="cup"><option value="">ทุกถ้วย</option><option value="ก">ถ้วย ก</option><option value="ข">ถ้วย ข</option><option value="ย">เยาวชน</option></select></div></div>
+<section class="card"><h2>📅 โปรแกรมและผลการแข่งขัน</h2><div id="matches" class="empty">กำลังโหลด…</div></section>
+<section class="card"><h2>⚽ รายชื่อทีม</h2><div id="teams" class="empty">กำลังโหลด…</div></section>
+<footer>ข้อมูลเพื่อการประชาสัมพันธ์ · เทศบาลเมืองกันตัง · หน้านี้ดูข้อมูลได้อย่างเดียว</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);let DATA={matches:[],teams:[]};
+const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){
+ const q=$('q').value.trim().toLocaleLowerCase('th'),cup=$('cup').value;
+ const ms=DATA.matches.filter(m=>(!cup||String(m.cup).includes(cup))&&[m.no,m.date,m.time,m.cup,m.home,m.away,m.field,m.note].join(' ').toLocaleLowerCase('th').includes(q));
+ $('matches').innerHTML=ms.length?'<div class="tablewrap"><table><thead><tr><th>คู่</th><th>วันที่</th><th>เวลา</th><th>ถ้วย / รอบ</th><th>ทีมเหย้า</th><th>ผล</th><th>ทีมเยือน</th><th>สนาม</th></tr></thead><tbody>'+ms.map(m=>m.note?'<tr><td colspan="8">'+esc(m.date)+' '+esc(m.note)+' '+esc(m.detail||'')+'</td></tr>':'<tr><td>'+esc(m.no)+'</td><td>'+esc(m.date)+'</td><td>'+esc(m.time)+'</td><td><span class="pill">'+esc(m.cup)+'</span></td><td>'+esc(m.home)+'</td><td class="score">'+esc(m.score||'ยังไม่ลงผล')+'</td><td>'+esc(m.away)+'</td><td>'+esc(m.field)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีข้อมูลการแข่งขันที่ตรงกับคำค้น</div>';
+ const ts=DATA.teams.filter(t=>(!cup||t.cup===cup)&&[t.no,t.cup,t.name].join(' ').toLocaleLowerCase('th').includes(q));
+ $('teams').innerHTML=ts.length?'<div class="tablewrap"><table><thead><tr><th>#</th><th>ประเภท</th><th>ชื่อทีม</th></tr></thead><tbody>'+ts.map(t=>'<tr><td>'+esc(t.no)+'</td><td>'+esc(t.cup==='ย'?'เยาวชน':('ถ้วย '+t.cup))+'</td><td>'+esc(t.name)+'</td></tr>').join('')+'</tbody></table></div>':'<div class="empty">ยังไม่มีรายชื่อทีม</div>';
+}
+function load(){google.script.run.withSuccessHandler(d=>{DATA=d||{matches:[],teams:[]};render();$('status').textContent='อัปเดตล่าสุด: '+(DATA.updatedAt?new Date(DATA.updatedAt).toLocaleString('th-TH'):'ยังไม่มีข้อมูลในเซิร์ฟเวอร์')+' · ดูอย่างเดียว';}).withFailureHandler(e=>{$('status').textContent='โหลดข้อมูลไม่สำเร็จ: '+(e&&e.message||e);}).getPublicData();}
+$('q').addEventListener('input',render);$('cup').addEventListener('change',render);load();
+</script>
+</body>
+</html>
