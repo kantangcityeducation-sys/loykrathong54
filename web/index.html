@@ -23,11 +23,15 @@
 <main id="app"></main>
 <div id="pr"></div>
 <div id="toast" role="status" aria-live="polite"></div>
+
+<!-- 1) ตั้งค่า + ข้อมูลตั้งต้น -->
 <script src="config.js"></script>
-<script src="js/data/seed-data.js"></script>
+<script src="js/data/current-data.js"></script>
+<!-- 2) แกนระบบ (state / ฟอร์ม / การแก้ไขข้อมูล) -->
 <script src="js/core/state.js"></script>
 <script src="js/data/doc-forms.js"></script>
 <script src="js/core/mutations.js"></script>
+<!-- 3) หน้าจอ -->
 <script src="js/views/menu-teams-draw.js"></script>
 <script src="js/views/program.js"></script>
 <script src="js/views/registry-lineup.js"></script>
@@ -38,11 +42,13 @@
 <script src="js/views/results-home.js"></script>
 <script src="js/views/settings.js"></script>
 <script src="js/core/shift-dates.js"></script>
-<script src="js/core/router.js"></script>
+<script src="js/core/router.js"></script>   <!-- ต้องอยู่หลังไฟล์ views ทั้งหมด (อ้างอิงฟังก์ชันหน้าจอ) -->
+<!-- 4) บันทึก / ซิงก์ / ออฟไลน์ -->
 <script src="js/core/sync.js"></script>
 <script src="js/core/savebar.js"></script>
 <script src="js/core/events.js"></script>
 <script src="js/core/pwa.js"></script>
+<!-- 5) เริ่มระบบ -->
 <script src="js/core/boot.js"></script>
 </body>
 </html>
